@@ -10,9 +10,8 @@ var allMedianAges = regionDataFil.map(d =>
 var minMedianAge = d3.min(allMedianAges);
 var maxMedianAge = d3.max(allMedianAges);
 var histogram = d3.histogram()
-                    .value(allMedianAges)
                     .thresholds(10)
-                    //(allMedianAges)
+                    (allMedianAges)
 
 var svg = d3.select('svg')
               .attr('width',width)
@@ -25,8 +24,8 @@ var bars = svg.selectAll('.bar')
               //.classed('bar',true)
 
 var rect = bars.append('rect')
-              .attr('x', d => {return d.x0}) // d.x stands for lower bound
+              .attr('x', d => {return d.x0*10}) // d.x stands for lower bound
               .attr('y',0)
-              .attr('width', d => {return (d.x1-d.x0)})// d.dx stands for range
+              .attr('width', d => {return (d.x1-d.x0)*9})// d.dx stands for range
               .attr('height', d => {return (d.length)*5})
               .attr('fill', 'steelblue')
